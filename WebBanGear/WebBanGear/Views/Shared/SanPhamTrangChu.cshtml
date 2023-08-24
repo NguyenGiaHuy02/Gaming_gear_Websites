@@ -1,0 +1,117 @@
+﻿
+@functions{
+    public String byteArrayToImage(byte[] byteArrayIn)
+    {
+        var base64 = Convert.ToBase64String(byteArrayIn);
+        var imgScr = String.Format("data:image/gif;base64,{0}", base64);
+        return imgScr;
+    }
+}
+@{ 
+    var banphim = (List<Model.ViewModel.SanPhamViewModel>)ViewBag.BanPhim;
+    var tainghe = (List<Model.ViewModel.SanPhamViewModel>)ViewBag.TaiNghe;
+    var chuot = (List<Model.ViewModel.SanPhamViewModel>)ViewBag.Chuot;
+}
+<div class="container">
+    <!-- BEGIN SALE PRODUCT & NEW ARRIVALS -->
+    <div class="row margin-bottom-40">
+        <!-- BEGIN SALE PRODUCT -->
+        <div class="col-md-12 sale-product">
+            <h2>
+            @Html.ActionLink("Bàn phím Gaming","DanhMucSanPham","SanPham",new { id = '3'},null)
+            </h2>
+            <div class="owl-carousel owl-carousel5">
+                @foreach (var item in banphim)
+                {
+                    <div>
+                        <div class="product-item">
+                            <div class="pi-img-wrapper">
+                                <img src="@byteArrayToImage(item.HinhAnh1)" class="img-responsive" alt="@item.HinhAnh1">
+                                <div>
+                                    <a href="@byteArrayToImage(item.HinhAnh1)" class="btn btn-default fancybox-button">Zoom</a>
+                                </div>
+                            </div>
+                            <h3><a href="@Url.Action("ChiTietSanPham","SanPham",new { masanpham = item.MaSanPham},null)">@item.TenSanPham</a></h3>
+                            <div class="pi-price">@(item.GiaTien)đ</div >
+                            <a href="/them-gio-hang?masp=@item.MaSanPham&soluong=1" class="btn btn-default add2cart">Đặt hàng</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- END SALE PRODUCT & NEW ARRIVALS -->
+    <div class="row margin-bottom-40 ">
+        <div class="col-md-12 sale-product">
+            <h2>@Html.ActionLink("Chuột Gaming", "DanhMucSanPham", "SanPham", new { id = '2' }, null)</h2>
+
+            <div class="owl-carousel owl-carousel5">
+                @foreach (var item in chuot)
+                {
+                    <div>
+                        <div class="product-item">
+                            <div class="pi-img-wrapper">
+                                <img src="@byteArrayToImage(item.HinhAnh1)" class="img-responsive" alt="@item.HinhAnh1">
+                                <div>
+                                    <a href="@byteArrayToImage(item.HinhAnh1)" class="btn btn-default fancybox-button">Zoom</a>
+                                </div>
+                            </div>
+                            <h3><a href="@Url.Action("ChiTietSanPhamChuot","SanPham",new { masanpham = item.MaSanPham},null)">@item.TenSanPham</a></h3>
+                            <div class="pi-price">@(item.GiaTien)đ</div>
+                            <a href="/them-gio-hang?masp=@item.MaSanPham&soluong=1" class="btn btn-default add2cart">Đặt hàng</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN TWO PRODUCTS & PROMO -->
+    <div class="row margin-bottom-35 ">
+        <div class="col-md-6 two-items-bottom-items">
+            <h2>@Html.ActionLink("Tai nghe Gaming", "DanhMucSanPham", "SanPham", new { id = '1' }, null)</h2>
+            <div class="owl-carousel owl-carousel2">
+                @foreach (var item in tainghe)
+                {
+                    <div>
+                        <div class="product-item">
+                            <div class="pi-img-wrapper">
+                                <img src="@byteArrayToImage(item.HinhAnh1)" class="img-responsive" alt="@item.HinhAnh1">
+                                <div>
+                                    <a href="@byteArrayToImage(item.HinhAnh1)" class="btn btn-default fancybox-button">Zoom</a>
+                                </div>
+                            </div>
+                            <h3><a href="@Url.Action("ChiTietSanPhamTaiNghe","SanPham",new { masanpham = item.MaSanPham},null)">@item.TenSanPham</a></h3>
+                            <div class="pi-price">@(item.GiaTien)đ</div>
+                            <a href="/them-gio-hang?masp=@item.MaSanPham&soluong=1" class="btn btn-default add2cart">Đặt hàng</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-6 shop-index-carousel">
+            <div class="content-slider">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="~/assets/pages/img/index-sliders/G502-Show.jpg" class="img-responsive" alt="Berry Lace Dress">
+                        </div>
+                        <div class="item">
+                            <img src="~/assets/pages/img/index-sliders/BlackWidow-2019-usp02-mobile.jpg" class="img-responsive" alt="Berry Lace Dress">
+                        </div>
+                        <div class="item">
+                            <img src="~/assets/pages/img/index-sliders/arctis_pro_wl_white_livingroom_wide_4k_001.jpg__1920x1080_q100_crop_fit_optimize_subsampling_2.0.jpg" class="img-responsive" alt="Berry Lace Dress">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PROMO -->
+    </div>
+    <!-- END TWO PRODUCTS & PROMO -->
+</div>

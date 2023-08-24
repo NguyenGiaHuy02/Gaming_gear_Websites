@@ -1,0 +1,71 @@
+﻿@model IPagedList<Model.ViewModel.SanPhamViewModel>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "DanhMucSanPhamTheoHang";
+    Layout = "~/Views/Shared/ProductListPage.cshtml";
+}
+@functions{
+    public String byteArrayToImage(byte[] byteArrayIn)
+    {
+        var base64 = Convert.ToBase64String(byteArrayIn);
+        var imgScr = String.Format("data:image/gif;base64,{0}", base64);
+        return imgScr;
+    }
+}
+                <div class="row list-view-sorting clearfix">
+                    <div class="col-md-2 col-sm-2 list-view">
+                        <a href="javascript:;"><i class="fa fa-th-large"></i></a>
+                        <a href="javascript:;"><i class="fa fa-th-list"></i></a>
+                    </div>
+                    <div class="col-md-10 col-sm-10">
+                        <div class="pull-right">
+                            <label class="control-label">Sort&nbsp;By:</label>
+                            <select class="form-control input-sm">
+                                <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
+                                <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
+                                <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
+                                <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
+                                <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- BEGIN PRODUCT LIST -->
+                <div class="row product-list">
+                    <!-- PRODUCT ITEM START -->
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="product-item">
+                                <div class="pi-img-wrapper">
+                                    <img src="@byteArrayToImage(item.HinhAnh1)" class="img-responsive" alt="@item.HinhAnh1">
+                                    <div>
+                                        <a href="@byteArrayToImage(item.HinhAnh1)" class="btn btn-default fancybox-button">Zoom</a>
+                                    </div>
+                                </div>
+                                <h3><a href="@Url.Action("ChiTietSanPhamTheoLoai","SanPham",new { masanpham = item.MaSanPham , maloai = item.TenLoai},null)">@item.TenSanPham</a></h3>
+                                <div class="pi-price">@item.GiaTien đ</div>
+                                <a href="/them-gio-hang?masp=@item.MaSanPham&soluong=1" class="btn btn-default add2cart">Đặt hàng</a>
+                            </div>
+                        </div>
+                    }
+                    <!-- PRODUCT ITEM END -->
+                </div>
+                <!-- END PRODUCT LIST -->
+                <!-- BEGIN PAGINATOR -->
+                <div class="row">
+                    <div class="col-md-8 col-sm-8">
+                        <ul class="pagination pull-right">
+                            @Html.PagedListPager(Model, page => Url.Action("DanhMucSanPhamTheoHang", new { page }), new PagedListRenderOptions
+                       {
+                           DisplayLinkToIndividualPages = true,
+                           DisplayPageCountAndCurrentLocation = false,
+                           MaximumPageNumbersToDisplay = 5,
+                           LiElementClasses = new String[] { "page-item" },
+                       })
+                        </ul>
+                    </div>
+                </div>
+                <!-- END PAGINATOR -->
+ 

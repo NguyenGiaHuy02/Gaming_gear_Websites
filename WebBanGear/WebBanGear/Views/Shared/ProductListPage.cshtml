@@ -1,0 +1,479 @@
+﻿@using WebBanGear.Common
+<!DOCTYPE html>
+
+
+<html lang="en">
+<!--<![endif]-->
+<!-- Head BEGIN -->
+<head>
+    <meta charset="utf-8">
+    <title>For Honor</title>
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta content="Metronic Shop UI description" name="description">
+    <meta content="Metronic Shop UI keywords" name="keywords">
+    <meta content="keenthemes" name="author">
+
+    <meta property="og:site_name" content="-CUSTOMER VALUE-">
+    <meta property="og:title" content="-CUSTOMER VALUE-">
+    <meta property="og:description" content="-CUSTOMER VALUE-">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
+    <meta property="og:url" content="-CUSTOMER VALUE-">
+
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Fonts START -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"><!--- fonts for slider on the index page -->
+    <!-- Fonts END -->
+    <!-- Global styles START -->
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Global styles END -->
+    <!-- Page level plugin styles START -->
+    <link href="~/assets/pages/css/animate.css" rel="stylesheet">
+    <link href="~/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+    <link href="~/assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+    <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
+    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
+    <link href="assets/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin styles END -->
+    <!-- Page level plugin styles END -->
+    <!-- Theme styles START -->
+    <link href="~/assets/pages/css/components.css" rel="stylesheet">
+    <link href="~/assets/pages/css/slider.css" rel="stylesheet">
+    <link href="~/assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/corporate/css/style.css" rel="stylesheet">
+    <link href="~/assets/corporate/css/style-responsive.css" rel="stylesheet">
+    <link href="~/assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+    <link href="~/assets/corporate/css/custom.css" rel="stylesheet">
+    <!-- Theme styles END -->
+</head>
+<!-- Head END -->
+<!-- Body BEGIN -->
+<body class="ecommerce">
+
+    <!-- BEGIN TOP BAR -->
+    <div class="pre-header">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN TOP BAR LEFT PART -->
+                <div class="col-md-6 col-sm-6 additional-shop-info">
+                    <ul class="list-unstyled list-inline">
+                        <li><i class="fa fa-phone"></i><span>+84xx xxx xxx</span></li>
+                        <!-- BEGIN CURRENCIES -->
+                        <li class="shop-currencies">
+                            <a href="javascript:void(0);" class="current">$</a>
+                        </li>
+                        <!-- END CURRENCIES -->
+                        <!-- BEGIN LANGS -->
+                        <li class="langs-block">
+                            <a href="javascript:void(0);" class="current">Tiếng Việt </a>
+                            <div class="langs-block-others-wrapper">
+                                <div class="langs-block-others">
+
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END LANGS -->
+                    </ul>
+                </div>
+                <!-- END TOP BAR LEFT PART -->
+                <!-- BEGIN TOP BAR MENU -->
+                @{
+                    var session = (UserLogin)Session[WebBanGear.Common.CommonConstrants.USER_SESSION];
+                }
+                @if (session == null)
+                {
+                    <div class="col-md-6 col-sm-6 additional-nav">
+                        <ul class="list-unstyled list-inline pull-right">
+                            <li>@Html.ActionLink("Đăng nhập", "DangNhap", "User")</li>
+                            <li>@Html.ActionLink("Đăng ký", "DangKy", "User")</li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-6 col-sm-6 additional-nav">
+                        <ul class="list-unstyled list-inline pull-right">
+                            <li>Xin chào: @session.Email</li>
+                            <li>@Html.ActionLink("Đăng xuất", "DangXuat", "User")</li>
+                        </ul>
+                    </div>
+                }
+                <!-- END TOP BAR MENU -->
+            </div>
+        </div>
+    </div>
+    <!-- END TOP BAR -->
+    <!-- BEGIN HEADER -->
+    <div class="header">
+        <div class="container">
+            <a class="site-logo" href="@Url.Action("Index","Home")">
+                <img src="@Url.Content("~/assets/corporate/img/logos/ForHonor-logo.png")" alt="For Hornor" width="175" height="65" />
+            </a>
+
+            <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+            <!-- BEGIN CART -->
+            @{Html.RenderAction("HeaderCart", "Home");}
+            <!--END CART -->
+            <!-- BEGIN NAVIGATION -->
+            <div class="header-navigation">
+                <ul>
+                    <li class="dropdown dropdown-megamenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                            Chuột
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="header-navigation-content">
+                                    <div class="row">
+                                        <div class="col-md-4 header-navigation-col">
+                                            <h4>Thương Hiệu</h4>
+                                            <ul>
+                                                <li>@Html.ActionLink("Logitech", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 1, maloai = '2' }, null)</li>
+                                                <li>@Html.ActionLink("Razer", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 2, maloai = '2' }, null)</li>
+                                                <li>@Html.ActionLink("HyperX", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 3, maloai = '2' }, null)</li>
+                                                <li>@Html.ActionLink("SteelSeries", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 4, maloai = '2' }, null)</li>
+                                                <li>@Html.ActionLink("Các sản phẩm khác ", "DanhMucSanPhamKhac", "SanPham", new { maloai = '2' }, null)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown dropdown-megamenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                            Bàn Phím
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="header-navigation-content">
+                                    <div class="row">
+                                        <div class="col-md-4 header-navigation-col">
+                                            <h4>Thương Hiệu</h4>
+                                            <ul>
+                                                <li>@Html.ActionLink("Logitech", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 1, maloai = '3' }, null)</li>
+                                                <li>@Html.ActionLink("Razer", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 2, maloai = '3' }, null)</li>
+                                                <li>@Html.ActionLink("HyperX", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 3, maloai = '3' }, null)</li>
+                                                <li>@Html.ActionLink("SteelSeries", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 4, maloai = '3' }, null)</li>
+                                                <li>@Html.ActionLink("Các sản phẩm khác ", "DanhMucSanPhamKhac", "SanPham", new { maloai = '3' }, null)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown dropdown-megamenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                            Tai Nghe
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="header-navigation-content">
+                                    <div class="row">
+                                        <div class="col-md-4 header-navigation-col">
+                                            <h4>Thương Hiệu</h4>
+                                            <ul>
+                                                <li>@Html.ActionLink("Logitech", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 1, maloai = '1' }, null)</li>
+                                                <li>@Html.ActionLink("Razer", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 2, maloai = '1' }, null)</li>
+                                                <li>@Html.ActionLink("HyperX", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 3, maloai = '1' }, null)</li>
+                                                <li>@Html.ActionLink("SteelSeries", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 4, maloai = '1' }, null)</li>
+                                                <li>@Html.ActionLink("Các sản phẩm khác ", "DanhMucSanPhamKhac", "SanPham", new { maloai = '1' }, null)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <!-- BEGIN TOP SEARCH -->
+                    <li class="menu-search">
+                        <span class="sep"></span>
+                        <i class="fa fa-search search-btn"></i>
+                        <div class="search-box">
+                            @using (Html.BeginForm("TuKhoaTimKiem", "TimKiem"))
+                            {
+                                <div class="input-group">
+                                    <input type="text" name="tukhoatk" placeholder="Search" class="form-control">
+                                    <span class="input-group-btn">
+                                        <input type="submit" value="Tìm kiếm" class="form-control" />
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                    <!-- END TOP SEARCH -->
+                </ul>
+            </div>
+            <!-- END NAVIGATION -->
+        </div>
+    </div>
+    <!-- Header END -->
+    <!-- BEGIN SLIDER -->
+    <div class="page-slider margin-bottom-35">
+        @RenderSection("Slider", false)
+    </div>
+    <!-- END SLIDER -->
+
+    <div class="main">
+        <div class="container">
+            <!-- BEGIN SIDEBAR & CONTENT -->
+            <div class="row margin-bottom-40">
+                <!-- BEGIN SIDEBAR -->
+                <div class="sidebar col-md-3 col-sm-5">
+                    <ul class="list-group margin-bottom-25 sidebar-menu">
+                        <li class="list-group-item clearfix dropdown active">
+                            <a href="javascript:void(0);" class="collapsed">
+                                <i class="fa fa-angle-right"></i>
+                                BÀN PHÍM
+
+                            </a>
+                            <ul class="dropdown-menu" style="display:block;">
+
+                                <li>@Html.ActionLink("Logitech", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 1, maloai = '3' }, null)</li>
+                                <li>@Html.ActionLink("Razer", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 2, maloai = '3' }, null)</li>
+                                <li>@Html.ActionLink("HyperX", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 3, maloai = '3' }, null)</li>
+                                <li>@Html.ActionLink("SteelSeries", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 4, maloai = '3' }, null)</li>
+                                <li>@Html.ActionLink("Các sản phẩm khác ", "DanhMucSanPhamKhac", "SanPham", new { maloai = '3' }, null)</li>
+                            </ul>
+                        </li>
+
+                        <li class="list-group-item clearfix dropdown active">
+                            <a href="javascript:void(0);" class="collapsed">
+                                <i class="fa fa-angle-right"></i>
+                                CHUỘT
+
+                            </a>
+                            <ul class="dropdown-menu" style="display:block;">
+
+                                <li>@Html.ActionLink("Logitech", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 1, maloai = '2' }, null)</li>
+                                <li>@Html.ActionLink("Razer", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 2, maloai = '2' }, null)</li>
+                                <li>@Html.ActionLink("HyperX", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 3, maloai = '2' }, null)</li>
+                                <li>@Html.ActionLink("SteelSeries", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 4, maloai = '2' }, null)</li>
+                                <li>@Html.ActionLink("Các sản phẩm khác ", "DanhMucSanPhamKhac", "SanPham", new { maloai = '2' }, null)</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item clearfix dropdown active">
+                            <a href="javascript:void(0);" class="collapsed">
+                                <i class="fa fa-angle-right"></i>
+                                TAI NGHE
+
+                            </a>
+                            <ul class="dropdown-menu" style="display:block;">
+
+                                <li>@Html.ActionLink("Logitech", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 1, maloai = '1' }, null)</li>
+                                <li>@Html.ActionLink("Razer", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 2, maloai = '1' }, null)</li>
+                                <li>@Html.ActionLink("HyperX", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 3, maloai = '1' }, null)</li>
+                                <li>@Html.ActionLink("SteelSeries", "DanhMucSanPhamTheoHang", "SanPham", new { mahang = 4, maloai = '1' }, null)</li>
+                                <li>@Html.ActionLink("Các sản phẩm khác ", "DanhMucSanPhamKhac", "SanPham", new { maloai = '1' }, null)</li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <div class="sidebar-filter margin-bottom-25">
+                        <h2>Filter</h2>
+                        <h3>Availability</h3>
+                        <div class="checkbox-list">
+                            <label><input type="checkbox"> Not Available (3)</label>
+                            <label><input type="checkbox"> In Stock (26)</label>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <!-- END SIDEBAR -->
+                <!-- BEGIN CONTENT -->
+                <div class="col-md-9 col-sm-7">
+                    @RenderBody()
+                </div>
+                <!-- END CONTENT -->
+            </div>
+            <!-- END SIDEBAR & CONTENT -->
+        </div>
+    </div>
+
+    <!-- BEGIN BRANDS -->
+    <div class="brands">
+        <div class="container">
+            <div class="owl-carousel owl-carousel6-brands">
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 1},null)"><img src="~/assets/pages/img/brands-logos/logitech-logo.png" alt="Logitech" title="Logitech"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 2},null)"><img src="~/assets/pages/img/brands-logos/Razer-logo.png" alt="Razer" title="Razer"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 1},null)"><img src="~/assets/pages/img/brands-logos/Corsair-logo.png" alt="Corsair" title="Corsair"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 1},null)"><img src="~/assets/pages/img/brands-logos/Dareu-logo.png" alt="Dareu" title="Dareu"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 5},null)"><img src="~/assets/pages/img/brands-logos/Asus-logo.png" alt="Asus" title="Asus"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 1},null)"><img src="~/assets/pages/img/brands-logos/Leopold-logo.png" alt="Leopold" title="Leopold"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 1},null)"><img src="~/assets/pages/img/brands-logos/Mistel-logo.png" alt="Mistel" title="Mistel"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 4},null)"><img src="~/assets/pages/img/brands-logos/Steelseries-logo.png" alt="Steelseries" title="Steelseries"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 3},null)"><img src="~/assets/pages/img/brands-logos/Hyperx-logo.png" alt="Hyperx" title="Hyperx"></a>
+                <a href="@Url.Action("DanhMucSanPhamHang","SanPham",new { mahang = 1},null)"><img src="~/assets/pages/img/brands-logos/Rapoo-logo.png" alt="Rapoo" title="Rapoo"></a>
+            </div>
+        </div>
+    </div>
+    <!-- END BRANDS -->
+    <!-- BEGIN STEPS -->
+    <div class="steps-block steps-block-red">
+        @RenderSection("DeliveryNum", false)
+    </div>
+    <!-- END STEPS -->
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN BOTTOM ABOUT BLOCK -->
+                <div class="col-md-3 col-sm-6 pre-footer-col">
+                    <h2>About us</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam sit nonummy nibh euismod tincidunt ut laoreet dolore magna aliquarm erat sit volutpat. Nostrud exerci tation ullamcorper suscipit lobortis nisl aliquip  commodo consequat. </p>
+                    <p>Duis autem vel eum iriure dolor vulputate velit esse molestie at dolore.</p>
+                </div>
+                <!-- END BOTTOM ABOUT BLOCK -->
+                <!-- BEGIN BOTTOM INFO BLOCK -->
+                <div class="col-md-3 col-sm-6 pre-footer-col">
+                    <h2>Information</h2>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Delivery Information</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Customer Service</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Order Tracking</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Shipping &amp; Returns</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="contacts.html">Contact Us</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Careers</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Payment Methods</a></li>
+                    </ul>
+                </div>
+                <!-- END INFO BLOCK -->
+                <!-- BEGIN TWITTER BLOCK -->
+                <div class="col-md-3 col-sm-6 pre-footer-col">
+
+                </div>
+                <!-- END TWITTER BLOCK -->
+                <!-- BEGIN BOTTOM CONTACTS -->
+                <div class="col-md-3 col-sm-6 pre-footer-col">
+                    <h2>Our Contacts</h2>
+                    <address class="margin-bottom-40">
+                        215, Điện Biên Phủ, Bình Thạnh <br>
+                        HoChiMinh City, VietNam<br>
+                        Phone: +84xxx xxx xxx<br>
+                        Fax: +84xxx xxx xxx<br>
+                        Email: info@forhonor.com<br>
+                    </address>
+                </div>
+                <!-- END BOTTOM CONTACTS -->
+            </div>
+            <hr>
+            <div class="row">
+                <!-- BEGIN SOCIAL ICONS -->
+                <div class="col-md-6 col-sm-6">
+                    <ul class="social-icons">
+
+                        <li><a class="facebook" data-original-title="facebook" href="https://www.facebook.com/YaminoOreki"></a></li>
+                        <li><a class="twitter" data-original-title="twitter" href="javascript:;"></a></li>
+                        <li><a class="googleplus" data-original-title="googleplus" href="javascript:;"></a></li>
+                        <li><a class="linkedin" data-original-title="linkedin" href="javascript:;"></a></li>
+                        <li><a class="youtube" data-original-title="youtube" href="javascript:;"></a></li>
+
+                    </ul>
+                </div>
+                <!-- END SOCIAL ICONS -->
+                <!-- BEGIN NEWLETTER -->
+                <div class="col-md-6 col-sm-6">
+                    <div class="pre-footer-subscribe-box pull-right">
+                        <h2>Newsletter</h2>
+                        <form action="#">
+                            <div class="input-group">
+                                <input type="text" placeholder="youremail@mail.com" class="form-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">Subscribe</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- END NEWLETTER -->
+            </div>
+        </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN COPYRIGHT -->
+                <div class="col-md-4 col-sm-4 padding-top-10">
+                    2022 For Honnor Studio .
+                </div>
+                <!-- END COPYRIGHT -->
+                <!-- BEGIN PAYMENTS -->
+                <div class="col-md-4 col-sm-4">
+                    <ul class="list-unstyled list-inline pull-right">
+                        <li><img src="~/assets/corporate/img/payments/western-union.jpg" alt="We accept Western Union" title="We accept Western Union"></li>
+                        <li><img src="~/assets/corporate/img/payments/american-express.jpg" alt="We accept American Express" title="We accept American Express"></li>
+                        <li><img src="~/assets/corporate/img/payments/MasterCard.jpg" alt="We accept MasterCard" title="We accept MasterCard"></li>
+                        <li><img src="~/assets/corporate/img/payments/PayPal.jpg" alt="We accept PayPal" title="We accept PayPal"></li>
+                        <li><img src="~/assets/corporate/img/payments/visa.jpg" alt="We accept Visa" title="We accept Visa"></li>
+                    </ul>
+                </div>
+                <!-- END PAYMENTS -->
+                <!-- BEGIN POWERED -->
+                <div class="col-md-4 col-sm-4 text-right">
+                    <p class="powered">Powered by: <a href="https://www.facebook.com/YaminoOreki">FOR HONOR</a></p>
+                </div>
+                <!-- END POWERED -->
+            </div>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>
+    <![endif]-->
+    <script src="~/assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="~/assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="~/assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src='~/assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+    <script src="~/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+    <script src="~/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="~/assets/pages/scripts/controller/GioHangController.js"></script>
+    <script src="~/assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
+    <script src="~/assets/corporate/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/assets/pages/scripts/bs-carousel.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            Layout.init();
+            Layout.initOWL();
+            Layout.initImageZoom();
+            Layout.initTouchspin();
+            Layout.initTwitter();
+
+            Layout.initFixHeaderWithPreHeader();
+            Layout.initNavScrolling();
+        });</script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+    @RenderSection("jsFooter", required: false)
+</body>
+<!-- END BODY -->
+</html>

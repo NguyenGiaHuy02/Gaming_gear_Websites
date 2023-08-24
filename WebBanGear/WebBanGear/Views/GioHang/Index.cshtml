@@ -1,0 +1,94 @@
+﻿@using WebBanGear.Common
+@model List<WebBanGear.Models.SanPhamGioHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var session = (UserLogin)Session[WebBanGear.Common.CommonConstrants.USER_SESSION];
+}
+@functions{
+    public String byteArrayToImage(byte[] byteArrayIn)
+    {
+        var base64 = Convert.ToBase64String(byteArrayIn);
+        var imgScr = String.Format("data:image/gif;base64,{0}", base64);
+        return imgScr;
+    }
+}
+@section jsFooter{
+        <script src="~/assets/pages/scripts/controller/GioHangController.js"></script>
+    }
+<div class="container">
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-12 col-sm-12">
+            <h1>Giỏ hàng</h1>
+            <div class="goods-page">
+                <div class="goods-data clearfix">
+                    <div class="table-wrapper-responsive">
+                        <table summary="Shopping cart">
+                            <tr>
+                                <th class="goods-page-image">Hình ảnh</th>
+                                <th class="goods-page-description">Tên sản phẩm</th>
+                                <th class="goods-page-ref-no">Mã sản phẩm</th>
+                                <th class="goods-page-quantity">Số lượng</th>
+                                <th class="goods-page-price">Đơn giá</th>
+                                <th class="goods-page-total" colspan="2">Tổng cộng</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="goods-page-image">
+                                        <a href="@byteArrayToImage(item.sanpham.HinhAnh1)"><img src="@byteArrayToImage(item.sanpham.HinhAnh1)" alt="@item.sanpham.HinhAnh1"></a>
+                                    </td>
+                                    <td class="goods-page-description">
+                                        <h3><a href="@Url.Action("ChiTietSanPhamTheoLoai","SanPham",new { masanpham = item.sanpham.MaSanPham , maloai = item.sanpham.TenLoai},null)">@item.sanpham.TenSanPham</a></h3>
+                                    </td>
+                                    <td class="goods-page-ref-no">
+                                        @item.sanpham.MaSanPham
+                                    </td>
+                                    <td class="goods-page-quantity">
+                                        <div class="product-quantity">
+                                            <input type="text" class="form-control input-sm txtQuantity" data-id="@item.sanpham.MaSanPham" value="@item.SoLuong">
+                                        </div>
+                                    </td>
+                                    <td class="goods-page-price">
+                                        <strong><span>đ</span>@item.sanpham.GiaTien</strong>
+                                    </td>
+                                    <td class="goods-page-total">
+                                        <strong><span>đ</span>@(item.TongGia = item.sanpham.GiaTien * item.SoLuong)</strong>
+                                    </td>
+                                    <td class="del-goods-col">
+                                        <a class="del-goods" data-id="@item.sanpham.MaSanPham" href="#">&nbsp;</a>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                    <div class="shopping-total">
+                        <ul>
+                            <li>
+                                <em>Tổng cộng</em>
+                                <strong class="price">@Model.Sum(x => x.TongGia) đ</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="btnContinue" class="btn btn-default" type="submit">Tiếp tục mua hàng <i class="fa fa-shopping-cart"></i></button>
+                @*Viết sau Payment*@
+                @if (session == null)
+                {
+                    <button id="btnLoginPage" class="btn btn-primary" type="submit">Thanh toán <i class="fa fa-check"></i></button>
+                }
+                else
+                {
+                    <button id="btnPaymentPage" class="btn btn-primary" type="submit">Thanh toán <i class="fa fa-check"></i></button>
+                }
+                <button id="btnUpdate" class="btn btn-primary" type="submit">Cập nhật <i class="fa fa-check"></i></button>
+            </div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END SIDEBAR & CONTENT -->
+</div>
+

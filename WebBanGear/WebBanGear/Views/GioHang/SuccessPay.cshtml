@@ -1,0 +1,90 @@
+﻿@using WebBanGear.Common
+@using Model.EF
+@model List<WebBanGear.Models.SanPhamGioHang>
+@{
+    ViewBag.Title = "SuccessPay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var session = (UserLogin)Session[WebBanGear.Common.CommonConstrants.USER_SESSION];
+    NguoiDung ng = @session.getNguoiDung(session.Email);
+}
+@section jsFooter{
+    <script src="~/assets/pages/scripts/controller/GioHangController.js"></script>
+}
+<div class="container">
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-6 col-sm-6">
+            @using (Html.BeginForm("Payment", "GioHang", FormMethod.Post))
+            {
+                <div class="form-horizontal">
+                    <h4>Hóa đơn mua hàng</h4>
+                    <hr />
+                    <div class="form-group">
+                        <label>Người mua</label>
+                        <strong class="form-control">@ng.HoTen</strong>
+                        <input name="manguoidung" type="hidden" class="form-control" value="@ng.MaNguoiDung" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <strong class="form-control">@ng.Email</strong>
+                    </div>
+                    <div class="form-group">
+                        <label>Số diện thoại : </label>
+                        <strong class="form-control">@ng.DienThoai</strong>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12">
+            <div class="goods-page">
+                <div class="goods-data clearfix">
+                    <div class="table-wrapper-responsive">
+                        <table summary="Shopping cart">
+                            <tr>
+                                <th class="goods-page-description">Tên sản phẩm</th>
+                                <th class="goods-page-ref-no">Mã sản phẩm</th>
+                                <th class="goods-page-quantity">Số lượng</th>
+                                <th class="goods-page-price">Đơn giá</th>
+                                <th class="goods-page-total" colspan="2">Tổng giá</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="goods-page-description">
+                                        <h3><a href="@Url.Action("ChiTietSanPhamTheoLoai","SanPham",new { masanpham = item.sanpham.MaSanPham , maloai = item.sanpham.TenLoai},null)">@item.sanpham.TenSanPham</a></h3>
+                                    </td>
+                                    <td class="goods-page-ref-no">
+                                        @item.sanpham.MaSanPham
+                                    </td>
+                                    <td class="goods-page-quantity">
+                                        <div class="product-quantity">
+                                            <strong><a>@item.SoLuong</a></strong>
+                                        </div>
+                                    </td>
+                                    <td class="goods-page-price">
+                                        <strong><span>đ</span>@item.sanpham.GiaTien</strong>
+                                    </td>
+                                    <td class="goods-page-total">
+                                        <strong><span>đ</span>@(item.TongGia = item.sanpham.GiaTien * item.SoLuong)</strong>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    <div class="shopping-total">
+                        <ul>
+                            <li>
+                                <em>Tổng cộng</em>
+                                <strong class="price">@Model.Sum(x => x.TongGia) đ</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="FinishBuy" class="btn btn-default btn-delete" type="submit">Quay lại trang chủ<i class="fa fa-shopping-cart"></i></button>
+            </div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END SIDEBAR & CONTENT -->
+</div>
